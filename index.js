@@ -15,7 +15,6 @@ app.use(routes);
 
 
 main()
-  .then(d => console.log("🦡Connected to MongoDB!!"))
   .catch(err => console.log(err));
 
 async function main() {

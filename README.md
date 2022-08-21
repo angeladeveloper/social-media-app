@@ -39,3 +39,7 @@ Learning when I am in a database and when I am in javascript was challenging. To
 - Full Front end
 - Better Admin support
 - More complex Timeline returns
+
+### AUTHOR
+
+[angeladeveloper](https://github.com/angeladeveloper)
