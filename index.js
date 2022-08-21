@@ -1,23 +1,29 @@
 const express = require('express');
 const db = require('./config/connection');
 const routes = require('./routes');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-const cwd = process.cwd();
+dotenv.config();
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Note: not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
-const activity = cwd.includes('01-Activities')
-  ? cwd.split('/01-Activities/')[1]
-  : cwd;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
 
-db.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`API server for ${activity} running on port ${PORT}!`);
-  });
-});
+
+main()
+  .then(d => console.log("🦡Connected to MongoDB!!"))
+  .catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect(process.env.MONGO_URL);
+  console.log("🦡Connected to MongoDB")
+}
+
+app.listen(3001, () => {
+  console.log("🚀 Server is running")
+})
